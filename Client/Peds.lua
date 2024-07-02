@@ -1,0 +1,48 @@
+-- CreateSellablePeds = function(gid)
+--     local gangID = string.match(gid, "_(%w+)_")
+--     gangID = string.lower(gangID)
+--     if Config.Peds[gangID] == nil then return end
+--     while inSprayZone do
+--         local pedSpawn = RPC.Execute('gang:PedCounterFetch', gangID, Config.Peds[gangID].maxPeds)
+--         if pedSpawn then
+--             local coords    = GetEntityCoords(PlayerPedId())
+--             local rngPed    = #Config.Peds[gangID].models
+--             local curPed    = math.random(1, rngPed)
+--             local ped       = Config.Peds[gangID].models
+--             local hashedPed = GetHashKey(ped[curPed])
+--             Util.LoadModel(hashedPed)
+--             local maxOffsetDistance = 75.0
+--             local offsetX = math.random(-maxOffsetDistance, maxOffsetDistance)
+--             local offsetY = math.random(-maxOffsetDistance, maxOffsetDistance)
+--             local spawnX = coords.x + offsetX
+--             local spawnY = coords.y + offsetY
+--             local spawnedPed = CreatePed(28, hashedPed, spawnX, spawnY, coords.z - 1, 0.0, true, true)
+--             MakePedWalkOnSidewalk(spawnedPed)
+--             SetBlockingOfNonTemporaryEvents(spawnedPed, true)
+--             TaskWanderInArea(spawnedPed, coords.x, coords.y, coords.z, 50.0, 2, 5.0)
+--             local net = NetworkGetNetworkIdFromEntity(spawnedPed)
+--             TriggerNetEvent('trp-gangsystem:trackPed', gangID, net)
+--         else
+--             TriggerNetEvent('trp-gangsystem:trackPedChecker', gangID)
+--         end
+--         Wait(Config.Peds[gangID].cooldown)
+--     end
+-- end
+
+-- function GetNearestSidewalkPosition(position)
+--     local down, sidewalkPosition, _ = GetGroundZAndNormalFor_3dCoord(position.x, position.y, position.z, 0)
+--     if down then
+--         sidewalkPosition = sidewalkPosition + vector3(0, 0, 1.0) -- Adjust for ground level
+--         return sidewalkPosition
+--     else
+--         return false
+--     end
+-- end
+
+-- function MakePedWalkOnSidewalk(ped)
+--     local currentPosition = GetEntityCoords(ped)
+--     local sidewalkPosition = GetNearestSidewalkPosition(currentPosition)
+--     if sidewalkPosition then
+--         TaskGoStraightToCoord(ped, sidewalkPosition.x, sidewalkPosition.y, sidewalkPosition.z, 1.0, -1, 0.0, 0.0)
+--     end
+-- end
